@@ -8,11 +8,12 @@ const placeItem = '.places__item';
 
 // @todo: Функция создания карточки
 function createCard(data) {
-  const { link, alt, name } = data;
+  const { link, name } = data;
   const cardElement = cardTemplate.querySelector(placeItem).cloneNode(true);
 
+  cardElement.querySelector(cardDeleteButton).addEventListener('click', deleteCard);
   cardElement.querySelector(cardImage).src = link;
-  cardElement.querySelector(cardImage).alt = alt;
+  cardElement.querySelector(cardImage).alt = name;
   cardElement.querySelector(catdTitle).textContent = name;
 
   return cardElement;
@@ -20,8 +21,6 @@ function createCard(data) {
 
 // @todo: Функция добавления карточки
 function appendCard(cardElement) {
-  cardElement.querySelector(cardDeleteButton).addEventListener('click', deleteCard);
-
   placesList.append(cardElement);
 }
 
