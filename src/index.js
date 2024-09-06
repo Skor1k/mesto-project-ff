@@ -41,12 +41,12 @@ initialCards.forEach(card => {
 });
 
 // Попап редактированя профиля
-function profileInfoPopup() {
+function openProfileInfoPopup() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 }
 
-profileInfoPopup()
+openProfileInfoPopup();
 
 //Открытие попапа редактированя профиля
 profileEditButton.addEventListener('click', () => {
@@ -67,16 +67,15 @@ function handleProfileFormSubmit(evt) {
 
   formElement.reset();
 
-  profileInfoPopup();
+  openProfileInfoPopup();
 
   closeModal(editPopup);
 };
 
 formElement.addEventListener('submit', handleProfileFormSubmit);
 
-
 // Увеличение картинок карточки
-function popupImage(evt) {
+function openPopupImage(evt) {
   overlayImagePopup.setAttribute('src', evt.target.src);
   overlayImagePopup.setAttribute('alt', evt.target.alt);
   captionImagePopup.textContent = evt.target.alt;
@@ -85,7 +84,7 @@ function popupImage(evt) {
 
 placesCardItem.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('card__image')) {
-    popupImage(evt);
+    openPopupImage(evt);
   }
 });
 
