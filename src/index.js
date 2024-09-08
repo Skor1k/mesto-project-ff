@@ -37,7 +37,7 @@ function appendCard(cardElement) {
 
 // Вывести карточки на страницу
 initialCards.forEach(card => {
-  appendCard(createCard(card));
+  appendCard(createCard(card), clickImageCard());
 });
 
 // Попап редактированя профиля
@@ -82,11 +82,13 @@ function openPopupImage(evt) {
   openModal(imageTypePopup);
 }
 
-placesCardItem.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('card__image')) {
-    openPopupImage(evt);
-  }
-});
+function clickImageCard() {
+  placesCardItem.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('card__image')) {
+      openPopupImage(evt);
+    }
+  });
+}
 
 //Закрытие попапа увеличение картинок карточки
 closeImagePopup.addEventListener('click', () => {
