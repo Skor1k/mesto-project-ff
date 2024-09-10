@@ -1,39 +1,34 @@
 // DOM
-const cardTemplate = document.querySelector('#card-template').content;
-const cardImage = '.card__image';
-const catdTitle = '.card__title';
-const cardDeleteButton = '.card__delete-button';
-const cardLikeButton = '.card__like-button';
-const placesCardItem = '.places__item';
+const cardTemplate = document.getElementById('card-template').content;
 
 // Функция создания карточки
-export function createCard(dataCard) {
-  const { link, name } = dataCard;
-  const card = cardTemplate.querySelector(placesCardItem).cloneNode(true);
+export function createCard(dataCard, likeCardItem, deleteCardItem, openPopupImage) {
+  const cardItem = cardTemplate.querySelector('.places__item').cloneNode(true);
 
-  const image = card.querySelector(cardImage);
-  image.src = link;
-  image.alt = name;
+  const cardImage = cardItem.querySelector('.card__image');
+  const catdTitle = cardItem.querySelector('.card__title');
+  const cardDeleteButton = cardItem.querySelector('.card__delete-button');
+  const cardLikeButton = cardItem.querySelector('.card__like-button');
 
-  card.querySelector(catdTitle).textContent = name;
+  cardImage.src = dataCard.link;
+  cardImage.alt = dataCard.name;
+  catdTitle.textContent = dataCard.name;
 
-  const likeButton = card.querySelector(cardLikeButton);
-  // Обработчик события для лайка
-  likeButton.addEventListener('click', (evt) => {
-    likeCard(evt);
-  });
+  //Обработчики событий
+  cardDeleteButton.addEventListener('click', deleteCardItem);
+  cardLikeButton.addEventListener('click', likeCardItem);
+  cardImage.addEventListener('click', openPopupImage);
 
-  // Обработчик события удаления
-  const deleteButton = card.querySelector(cardDeleteButton);
-  deleteButton.addEventListener('click', () => {
-    card.remove();
-  });
+  return cardItem;
+}
 
-  return card;
+// Удаление карточки
+export function deleteCardItem(evt) {
+  evt.target.closest('.places__item').remove();
 }
 
 // Лайк карточки
-function likeCard(evt) {
+export function likeCardItem(evt) {
   if (evt.target.classList.contains('card__like-button')) {
     evt.target.classList.toggle('card__like-button_is-active');
   };

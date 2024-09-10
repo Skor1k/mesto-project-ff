@@ -1,6 +1,6 @@
 // Импорт файлов
 import './pages/index.css';
-import { createCard } from './scripts/card.js';
+import { createCard, likeCardItem, deleteCardItem } from './scripts/card.js';
 import { initialCards } from './scripts/cards.js';
 import { openModal, closeModal } from './scripts/modal.js';
 
@@ -22,22 +22,16 @@ const closeAddButton = addCardPopup.querySelector('.popup__close');
 const formCardAdd = document.forms['new-place'];
 const cardInput = formCardAdd.elements['place-name'];
 const linkInput = formCardAdd.elements['link'];
-
-
-// Увеличение картинок карточки
+// DOM увеличение картинок карточки
 const imageTypePopup = document.querySelector('.popup_type_image');
 const closeImagePopup = imageTypePopup.querySelector('.popup__close');
 const overlayImagePopup = imageTypePopup.querySelector('.popup__image');
 const captionImagePopup = imageTypePopup.querySelector('.popup__caption');
 
-// Функция добавления карточки
-function appendCard(cardElement) {
+// Добавление карточки
+initialCards.forEach((item) => {
+  const cardElement = createCard(item, likeCardItem, deleteCardItem, openPopupImage);
   placesCardItem.append(cardElement);
-}
-
-// Вывести карточки на страницу
-initialCards.forEach(card => {
-  appendCard(createCard(card), clickImageCard());
 });
 
 // Попап редактированя профиля
@@ -74,20 +68,12 @@ function handleProfileFormSubmit(evt) {
 
 formElement.addEventListener('submit', handleProfileFormSubmit);
 
-// Увеличение картинок карточки
+// Попап увеличения картинок карточки
 function openPopupImage(evt) {
   overlayImagePopup.setAttribute('src', evt.target.src);
   overlayImagePopup.setAttribute('alt', evt.target.alt);
   captionImagePopup.textContent = evt.target.alt;
   openModal(imageTypePopup);
-}
-
-function clickImageCard() {
-  placesCardItem.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('card__image')) {
-      openPopupImage(evt);
-    }
-  });
 }
 
 //Закрытие попапа увеличение картинок карточки
@@ -114,7 +100,7 @@ formCardAdd.addEventListener('submit', (evt) => {
     link: linkInput.value
   };
 
-  const newCard = createCard(newCardData);
+  const newCard = createCard(newCardData, likeCardItem, deleteCardItem);
   placesCardItem.prepend(newCard);
 
   formCardAdd.reset();
