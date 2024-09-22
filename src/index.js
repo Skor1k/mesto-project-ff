@@ -41,8 +41,8 @@ const validationConfig = {
 let userId;
 
 // Функция сохранения
-function renderLoading (isLoading, button) {
-  button.textContent = isLoading ? 'Сохранение...' : 'Сохранить';
+function renderLoading (popup, name) {
+  popup.querySelector('.popup__button').textContent = name;
 };
 
 // Аватар
@@ -85,7 +85,7 @@ function handleConfirmDelete (evt) {
 // Редактирование профиля
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(true, popupEditProfile.querySelector('.popup__button'));
+  renderLoading(popupEditProfile, 'Сохранение...');
   updateUserProfile({
     name: popupEditProfile.name.value,
     about: popupEditProfile.description.value,
@@ -99,14 +99,34 @@ function handleProfileFormSubmit (evt) {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false, popupEditProfile.querySelector('.popup__button'));
+      renderLoading(popupEditProfile, 'Сохранить');
     });
 };
+
+// function handleProfileSubmit(event) {
+//   event.preventDefault();
+
+//   setButtonName(profilePopup, 'Сохранение...');
+
+//   saveProfile(profileNameInput, descriptionInput)
+//       .then((data) => {
+//           profileTitle.textContent = data.name;
+//           profileDescription.textContent = data.about;
+//           closePopup(profilePopup);
+//           clearValidation(editProfileForm, validationConfig);
+//       })
+//       .catch((err) => {
+//           console.error(err);
+//       })
+//       .finally(() => {
+//           setButtonName(profilePopup, 'Сохранить');
+//       });
+// }
 
 // Редактирование аватара
 function handleAvatarFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(true, popupAvatarForm.querySelector('.popup__button'));
+  renderLoading(popupAvatarForm, 'Сохранение...');
   updateUserAvatar(popupAvatarForm.link.value)
     .then((updatedProfile) => {
       fillProfileInfo(updatedProfile);
@@ -117,14 +137,14 @@ function handleAvatarFormSubmit (evt) {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false, popupAvatarForm.querySelector('.popup__button'));
+      renderLoading(popupAvatarForm, 'Сохранить');
     });
 };
 
 // Добавление новой карточки
 function handleNewCardFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(true, popupNewCardForm.querySelector('.popup__button'));
+  renderLoading(popupNewCardForm, 'Сохранение...Сохранение');
   const name = popupNewCardForm.elements['place-name'].value;
   const link = popupNewCardForm.elements.link.value;
   postNewCard({ name, link })
@@ -146,7 +166,7 @@ function handleNewCardFormSubmit (evt) {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false, popupNewCardForm.querySelector('.popup__button'));
+      renderLoading(popupNewCardForm, 'Сохранить');
     });
 };
 
