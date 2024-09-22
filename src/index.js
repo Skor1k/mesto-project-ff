@@ -40,6 +40,21 @@ const validationConfig = {
 
 let userId;
 
+// Инициализация
+getInitialInfo()
+  .then((result) => {
+    const userInfo = result[0];
+    userId = userInfo._id;
+    const initialCards = result[1];
+    fillProfileInfo(userInfo);
+    renderInitialCards(initialCards, userId);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+enableValidation(validationConfig);
+
 // Функция сохранения
 function renderLoading (popup, name) {
   popup.querySelector('.popup__button').textContent = name;
@@ -219,17 +234,4 @@ document.addEventListener('click', (evt) => {
   }
 });
 
-// Инициализация
-getInitialInfo()
-  .then((result) => {
-    const userInfo = result[0];
-    userId = userInfo._id;
-    const initialCards = result[1];
-    fillProfileInfo(userInfo);
-    renderInitialCards(initialCards, userId);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
-enableValidation(validationConfig);
