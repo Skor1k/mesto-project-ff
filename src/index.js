@@ -1,7 +1,7 @@
 // Импорт файлов
 import './pages/index.css';
 import { renderCard, likeCard, deleteCard } from './scripts/card.js';
-import { openModal, closeModal, closeModalOnOverlay } from './scripts/modal.js';
+import { openModal, closeModal, closeOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
 import { getInitialInfo, postNewCard, updateUserAvatar, updateUserProfile, deleteCard as deleteCardFromServer } from './scripts/api.js';
 
@@ -159,7 +159,7 @@ function fillProfilePopup (form, name, description) {
 // Слушатели
 // Попап картинки
 popupImageElement.addEventListener('click', (evt) => {
-  closeModalOnOverlay(evt);
+  closeOverlayModal(evt);
 });
 
 // Профиль
@@ -174,7 +174,7 @@ profileEditButton.addEventListener('click', () => {
 });
 
 popupProfile.addEventListener('click', (evt) => {
-  closeModalOnOverlay(evt);
+  closeOverlayModal(evt);
 });
 
 popupEditProfile.addEventListener('submit', handleProfileFormSubmit);
@@ -187,7 +187,7 @@ avatarEditButton.addEventListener('click', (evt) => {
 });
 
 popupAvatar.addEventListener('click', (evt) => {
-  closeModalOnOverlay(evt);
+  closeOverlayModal(evt);
 });
 
 popupAvatarForm.addEventListener('submit', handleAvatarFormSubmit);
@@ -200,14 +200,14 @@ newCardButton.addEventListener('click', () => {
 });
 
 popupNewCard.addEventListener('click', (evt) => {
-  closeModalOnOverlay(evt);
+  closeOverlayModal(evt);
 });
 
 popupNewCardForm.addEventListener('submit', handleNewCardFormSubmit);
 
 // Удаление
 popupConfirm.addEventListener('click', (evt) => {
-  closeModalOnOverlay(evt);
+  closeOverlayModal(evt);
 });
 
 popupConfirmButton.addEventListener('click', handleConfirmDelete);

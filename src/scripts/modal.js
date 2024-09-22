@@ -2,18 +2,18 @@
 export function openModal(popup) {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closePressEscapeModal);
-  popup.addEventListener('mousedown', closeModalOnOverlay);
+  popup.addEventListener('mousedown', closeOverlayModal);
 }
 
 // Закрытие попапа
 export function closeModal(popup) {
   popup.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', closePressEscapeModal);
-  popup.removeEventListener('mousedown', closeModalOnOverlay);
+  popup.removeEventListener('mousedown', closeOverlayModal);
 }
 
 // Оверлэй
-function closeModalOnOverlay(evt) {
+export function closeOverlayModal(evt) {
   if (evt.target === evt.currentTarget) {
     closeModal(evt.currentTarget);
   }
