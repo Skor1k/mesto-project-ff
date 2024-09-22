@@ -29,8 +29,8 @@ const profileDescription = document.querySelector('.profile__description');
 const profileAvatar = document.querySelector('.profile__image');
 const profileEditButton = document.querySelector('.profile__edit-button');
 
-const profileNameInput = editProfileForm.querySelector('.popup__input_type_name');
-const descriptionInput = editProfileForm.querySelector('.popup__input_type_description');
+const profileNameInput = popupEditProfile.querySelector('.popup__input_type_name');
+const descriptionInput = popupEditProfile.querySelector('.popup__input_type_description');
 
 // Валидация
 const validationConfig = {
