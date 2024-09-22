@@ -64,7 +64,7 @@ function renderLoading (popup, name) {
 function fillProfileInfo (userInfo) {
   profileTitle.textContent = userInfo.name;
   profileDescription.textContent = userInfo.about;
-  profileAvatar.style.backgroundImage = `url(${userInfo.avatar})`;
+  profileAvatar.setAttribute('style', `background-image: url(${userInfo.avatar})`);
 };
 
 // Карточки на странице
