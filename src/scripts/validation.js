@@ -1,34 +1,54 @@
-// Функции валидации форм и полей
+// Функции
 export function enableValidation (validationConfig) {
-  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector),);
+  const formList = Array.from(
+    document.querySelectorAll(validationConfig.formSelector),
+  );
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement,
+    setEventListeners(
+      formElement,
       validationConfig.inputSelector,
       validationConfig.inputErrorClass,
       validationConfig.errorClass,
       validationConfig.submitButtonSelector,
-      validationConfig.inactiveButtonClass);
+      validationConfig.inactiveButtonClass,
+    );
   });
 };
 
-function showInputError (formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
+function showInputError (
+  formElement,
+  inputElement,
+  errorMessage,
+  inputErrorClass,
+  errorClass,
+) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 
-function hideInputError (formElement, inputElement, inputErrorClass, errorClass) {
+function hideInputError (
+  formElement,
+  inputElement,
+  inputErrorClass,
+  errorClass,
+) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
   errorElement.textContent = '';
   errorElement.classList.remove(errorClass);
 };
 
-function checkInputValidity (formElement, inputElement, inputErrorClass, errorClass) {
+function checkInputValidity (
+  formElement,
+  inputElement,
+  inputErrorClass,
+  errorClass,
+) {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -36,19 +56,37 @@ function checkInputValidity (formElement, inputElement, inputErrorClass, errorCl
   }
 
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      inputErrorClass,
+      errorClass,
+    );
   } else {
     hideInputError(formElement, inputElement, inputErrorClass, errorClass);
   }
 };
 
-function setEventListeners (formElement, inputSelector, inputErrorClass, errorClass, submitButtonSelector, inactiveButtonClass) {
+function setEventListeners (
+  formElement,
+  inputSelector,
+  inputErrorClass,
+  errorClass,
+  submitButtonSelector,
+  inactiveButtonClass,
+) {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
+      checkInputValidity(
+        formElement,
+        inputElement,
+        inputErrorClass,
+        errorClass,
+      );
       toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
@@ -71,11 +109,20 @@ function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
 };
 
 export function clearValidation (formElement, validationConfig) {
-  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
-  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
+  const inputList = Array.from(
+    formElement.querySelectorAll(validationConfig.inputSelector),
+  );
+  const buttonElement = formElement.querySelector(
+    validationConfig.submitButtonSelector,
+  );
   buttonElement.classList.add(validationConfig.inactiveButtonClass);
   inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
+    hideInputError(
+      formElement,
+      inputElement,
+      validationConfig.inputErrorClass,
+      validationConfig.errorClass,
+    );
     inputElement.setCustomValidity('');
   });
 };

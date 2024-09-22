@@ -2,9 +2,9 @@
 import './pages/index.css';
 import { renderCard, likeCard, deleteCard } from './scripts/card.js';
 // import { initialCards } from './scripts/cards.js';
-import { openModal, closeModal } from './scripts/modal.js';
+import { openModal, closeModal, closeOnOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
-import { getInitialInfo, postNewCard, updateUserAvatar, updateUserProfile, deleteCardFromServer } from './scripts/api.js';
+import { getInitialInfo, postNewCard, updateUserAvatar, updateUserProfile, deleteCard as deleteCardFromServer } from './scripts/api.js';
 
 // DOM
 const placesList = document.querySelector('.places__list');
