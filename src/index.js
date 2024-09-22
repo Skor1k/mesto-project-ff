@@ -159,7 +159,7 @@ function fillProfilePopup (form, name, description) {
 // Слушатели
 // Попап картинки
 popupImageElement.addEventListener('click', (evt) => {
-  closeOverlayModal(evt);
+  closeModalOnOverlay(evt);
 });
 
 // Профиль
@@ -174,7 +174,7 @@ profileEditButton.addEventListener('click', () => {
 });
 
 popupProfile.addEventListener('click', (evt) => {
-  closeOverlayModal(evt);
+  closeModalOnOverlay(evt);
 });
 
 popupEditProfile.addEventListener('submit', handleProfileFormSubmit);
@@ -187,7 +187,7 @@ avatarEditButton.addEventListener('click', (evt) => {
 });
 
 popupAvatar.addEventListener('click', (evt) => {
-  closeOverlayModal(evt);
+  closeModalOnOverlay(evt);
 });
 
 popupAvatarForm.addEventListener('submit', handleAvatarFormSubmit);
@@ -200,14 +200,14 @@ newCardButton.addEventListener('click', () => {
 });
 
 popupNewCard.addEventListener('click', (evt) => {
-  closeOverlayModal(evt);
+  closeModalOnOverlay(evt);
 });
 
 popupNewCardForm.addEventListener('submit', handleNewCardFormSubmit);
 
 // Удаление
 popupConfirm.addEventListener('click', (evt) => {
-  closeOverlayModal(evt);
+  closeModalOnOverlay(evt);
 });
 
 popupConfirmButton.addEventListener('click', handleConfirmDelete);
