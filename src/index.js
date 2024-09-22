@@ -1,6 +1,6 @@
 // Импорт файлов
 import './pages/index.css';
-import { likeCard, deleteCard } from './scripts/card.js';
+import { createCard, likeCard, deleteCard } from './scripts/card.js';
 import { renderLoading } from './scripts/utils.js';
 import { openModal, closeModal, closeOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
@@ -80,12 +80,7 @@ function renderCard (
   }
 };
 
-// Аватар
-function fillProfileInfo (userInfo) {
-  profileTitle.textContent = userInfo.name;
-  profileDescription.textContent = userInfo.about;
-  profileAvatar.setAttribute('style', `background-image: url(${userInfo.avatar})`);
-};
+
 
 // Карточки на странице
 function renderInitialCards (initialCards, userId) {
@@ -176,7 +171,7 @@ function handleNewCardFormSubmit (evt) {
         likeCard,
         openConfirmationForm,
         openImagePopup,
-        'start',
+        'start'
       );
       closeModal(popupNewCard);
       popupNewCardForm.reset();
@@ -259,3 +254,9 @@ document.addEventListener('click', (evt) => {
 });
 
 
+// Аватар
+function fillProfileInfo (userInfo) {
+  profileTitle.textContent = userInfo.name;
+  profileDescription.textContent = userInfo.about;
+  profileAvatar.setAttribute('style', `background-image: url(${userInfo.avatar})`);
+};

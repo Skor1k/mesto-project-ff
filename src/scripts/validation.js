@@ -27,22 +27,29 @@ function showInputError (
 ) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);
-  inputElement.setCustomValidity("");
+  inputElement.setCustomValidity('');
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 
-function hideInputError (
-  formElement,
-  inputElement,
-  inputErrorClass,
-  errorClass,
-) {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(inputErrorClass);
-  errorElement.textContent = '';
-  errorElement.classList.remove(errorClass);
-};
+// function hideInputError (
+//   formElement,
+//   inputElement,
+//   inputErrorClass,
+//   errorClass,
+// ) {
+//   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+//   inputElement.classList.remove(inputErrorClass);
+//   errorElement.classList.remove(errorClass);
+//   errorElement.textContent = '';
+// };
+
+function hideInputError(formElement, inputElement, config) {
+  const inputError = formElement.querySelector(`.${inputElement.id}-error`);
+  input.classList.remove(config.inputErrorClass);
+  inputError.classList.remove(config.errorClass);
+  inputError.textContent = '';
+}
 
 function checkInputValidity (
   formElement,
@@ -53,7 +60,7 @@ function checkInputValidity (
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
-    inputElement.setCustomValidity("");
+    inputElement.setCustomValidity('');
   }
 
   if (!inputElement.validity.valid) {

@@ -6,7 +6,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 
 
 // Создание карточки
-function createCard (card, userId, deleteItem, likeItem, openImage) {
+export function createCard (card, userId, deleteItem, likeItem, openImage) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
   const cardLikeButton = cardElement.querySelector('.card__like-button');
@@ -77,7 +77,7 @@ export function likeCard (evt, cardId) {
 };
 
 // Удаление
-// export function deleteCard (evt, cardId) {
-//   openModal(popupConfirm);
-//   popupConfirm.dataset.cardId = cardId;
-// };
+export function deleteCard (evt, cardId) {
+  openModal(popupConfirm);
+  popupConfirm.dataset.cardId = cardId;
+};
