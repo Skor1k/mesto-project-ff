@@ -76,8 +76,9 @@ export function likeCard (evt, cardId) {
   }
 };
 
-// Удаление
-export function deleteCard (evt, cardId) {
-  openModal(popupConfirm);
-  popupConfirm.dataset.cardId = cardId;
-};
+// // Удаление
+// export function deleteCard (evt, cardId) {
+//   openModal(popupConfirm);
+//   popupConfirm.dataset.cardId = cardId;
+// };
+

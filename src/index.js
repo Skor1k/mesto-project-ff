@@ -1,6 +1,6 @@
 // Импорт файлов
 import './pages/index.css';
-import { createCard, likeCard, deleteCard } from './scripts/card.js';
+import { createCard, likeCard } from './scripts/card.js';
 import { renderLoading } from './scripts/utils.js';
 import { openModal, closeModal, closeOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
@@ -28,6 +28,9 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const profileAvatar = document.querySelector('.profile__image');
 const profileEditButton = document.querySelector('.profile__edit-button');
+
+const profileNameInput = editProfileForm.querySelector('.popup__input_type_name');
+const descriptionInput = editProfileForm.querySelector('.popup__input_type_description');
 
 // Валидация
 const validationConfig = {
@@ -80,8 +83,6 @@ function renderCard (
   }
 };
 
-
-
 // Карточки на странице
 function renderInitialCards (initialCards, userId) {
   initialCards.forEach((card) => {
@@ -120,13 +121,13 @@ function openConfirmationForm (evt, cardId) {
 // Редактирование профиля
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(popupEditProfile, 'Сохранение...');
-  updateUserProfile({
-    name: popupEditProfile.name.value,
-    about: popupEditProfile.description.value,
-  })
-    .then((updatedProfile) => {
-      fillProfileInfo(updatedProfile);
+
+  renderLoading(popupProfile, 'Сохранение...');
+
+  updateUserProfile(profileNameInput, descriptionInput)
+    .then((data) => {
+      profileTitle.textContent = data.name;
+      profileDescription.textContent = data.about;
       closeModal(popupProfile);
       clearValidation(popupEditProfile, validationConfig);
     })
@@ -134,7 +135,7 @@ function handleProfileFormSubmit (evt) {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(popupEditProfile, 'Сохранить');
+      renderLoading(popupProfile, 'Сохранить');
     });
 };
 
@@ -198,15 +199,24 @@ popupImageElement.addEventListener('click', (evt) => {
 });
 
 // Профиль
-profileEditButton.addEventListener('click', () => {
+// profileEditButton.addEventListener('click', () => {
+//   clearValidation(popupEditProfile, validationConfig);
+//   fillProfilePopup(
+//     popupEditProfile,
+//     profileTitle.textContent,
+//     profileDescription.textContent,
+//   );
+//   openModal(popupProfile);
+// });
+
+function handleEditButton() {
+  profileNameInput.value = profileTitle.textContent;
+  descriptionInput.value = profileDescription.textContent;
   clearValidation(popupEditProfile, validationConfig);
-  fillProfilePopup(
-    popupEditProfile,
-    profileTitle.textContent,
-    profileDescription.textContent,
-  );
-  openModal(popupProfile);
-});
+  openPopup(popupProfile);
+}
+
+profileEditButton.addEventListener('click', handleEditButton);
 
 popupProfile.addEventListener('click', (evt) => {
   closeOverlayModal(evt);
@@ -252,7 +262,6 @@ document.addEventListener('click', (evt) => {
     closeModal(evt.target.parentNode.parentNode);
   }
 });
-
 
 // Аватар
 function fillProfileInfo (userInfo) {

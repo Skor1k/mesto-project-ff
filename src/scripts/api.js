@@ -30,13 +30,13 @@ export function getUserInfo () {
 };
 
 // Профиль
-export function updateUserProfile (userProfileData) {
+export function updateUserProfile (userProfileName, userProfileDescription) {
   return fetch(apiConfig.url + '/users/me', {
     method: 'PATCH',
     headers: apiConfig.headers,
     body: JSON.stringify({
-      name: userProfileData.name,
-      about: userProfileData.about,
+      name: userProfileName.value,
+      about: userProfileDescription.value,
     }),
   }).then((res) => getResponseData(res));
 };
