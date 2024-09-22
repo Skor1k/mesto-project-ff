@@ -85,7 +85,7 @@ function handleConfirmDelete (evt) {
 // Редактирование профиля
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(popupEditProfile, 'Сохранение...');
+  renderLoading(popupEditProfile, 'Подтверждение...');
   updateUserProfile({
     name: popupEditProfile.name.value,
     about: popupEditProfile.description.value,
@@ -103,30 +103,10 @@ function handleProfileFormSubmit (evt) {
     });
 };
 
-// function handleProfileSubmit(event) {
-//   event.preventDefault();
-
-//   setButtonName(profilePopup, 'Сохранение...');
-
-//   saveProfile(profileNameInput, descriptionInput)
-//       .then((data) => {
-//           profileTitle.textContent = data.name;
-//           profileDescription.textContent = data.about;
-//           closePopup(profilePopup);
-//           clearValidation(editProfileForm, validationConfig);
-//       })
-//       .catch((err) => {
-//           console.error(err);
-//       })
-//       .finally(() => {
-//           setButtonName(profilePopup, 'Сохранить');
-//       });
-// }
-
 // Редактирование аватара
 function handleAvatarFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(popupAvatarForm, 'Сохранение...');
+  renderLoading(popupAvatarForm, 'Подтверждение...');
   updateUserAvatar(popupAvatarForm.link.value)
     .then((updatedProfile) => {
       fillProfileInfo(updatedProfile);
@@ -144,7 +124,7 @@ function handleAvatarFormSubmit (evt) {
 // Добавление новой карточки
 function handleNewCardFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(popupNewCardForm, 'Сохранение...Сохранение');
+  renderLoading(popupNewCardForm, 'Подтверждение...');
   const name = popupNewCardForm.elements['place-name'].value;
   const link = popupNewCardForm.elements.link.value;
   postNewCard({ name, link })
