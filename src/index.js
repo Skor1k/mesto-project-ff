@@ -1,7 +1,7 @@
 // Импорт файлов
 import './pages/index.css';
 import { renderCard, likeCard, deleteCard } from './scripts/card.js';
-import { openModal, closeModal } from './scripts/modal.js';
+import { openModal, closeModal, closeModalOnOverlay } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
 import { getInitialInfo, postNewCard, updateUserAvatar, updateUserProfile, deleteCard as deleteCardFromServer } from './scripts/api.js';
 
@@ -85,7 +85,7 @@ function handleConfirmDelete (evt) {
 // Редактирование профиля
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(popupEditProfile, 'Подтверждение...');
+  renderLoading(popupEditProfile, 'Сохранение...');
   updateUserProfile({
     name: popupEditProfile.name.value,
     about: popupEditProfile.description.value,
@@ -106,7 +106,7 @@ function handleProfileFormSubmit (evt) {
 // Редактирование аватара
 function handleAvatarFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(popupAvatarForm, 'Подтверждение...');
+  renderLoading(popupAvatarForm, 'Сохранение...');
   updateUserAvatar(popupAvatarForm.link.value)
     .then((updatedProfile) => {
       fillProfileInfo(updatedProfile);
@@ -124,7 +124,7 @@ function handleAvatarFormSubmit (evt) {
 // Добавление новой карточки
 function handleNewCardFormSubmit (evt) {
   evt.preventDefault();
-  renderLoading(popupNewCardForm, 'Подтверждение...');
+  renderLoading(popupNewCardForm, 'Сохранение...');
   const name = popupNewCardForm.elements['place-name'].value;
   const link = popupNewCardForm.elements.link.value;
   postNewCard({ name, link })
