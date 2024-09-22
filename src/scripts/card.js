@@ -4,7 +4,6 @@ import { deleteLike, putLike } from './api';
 // DOM
 const cardTemplate = document.querySelector('#card-template').content;
 
-
 // Создание карточки
 export function createCard (card, userId, deleteItem, likeItem, openImage) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
@@ -49,8 +48,6 @@ export function createCard (card, userId, deleteItem, likeItem, openImage) {
   return cardElement;
 };
 
-
-
 // Лайк
 export function likeCard (evt, cardId) {
   const currentLikes = evt.target.parentNode.querySelector('.card__like-count');
@@ -75,10 +72,3 @@ export function likeCard (evt, cardId) {
       });
   }
 };
-
-// // Удаление
-// export function deleteCard (evt, cardId) {
-//   openModal(popupConfirm);
-//   popupConfirm.dataset.cardId = cardId;
-// };
-
