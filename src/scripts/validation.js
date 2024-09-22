@@ -27,6 +27,7 @@ function showInputError (
 ) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);
+  inputElement.setCustomValidity("");
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };

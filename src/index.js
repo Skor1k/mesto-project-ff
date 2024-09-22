@@ -1,6 +1,7 @@
 // Импорт файлов
 import './pages/index.css';
-import { renderCard, likeCard, deleteCard } from './scripts/card.js';
+import { likeCard, deleteCard } from './scripts/card.js';
+import { renderLoading } from './scripts/utils.js';
 import { openModal, closeModal, closeOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
 import { getInitialInfo, postNewCard, updateUserAvatar, updateUserProfile, deleteCard as deleteCardFromServer } from './scripts/api.js';
@@ -55,9 +56,28 @@ getInitialInfo()
 
 enableValidation(validationConfig);
 
-// Функция сохранения
-function renderLoading (popup, name) {
-  popup.querySelector('.popup__button').textContent = name;
+// Расположение карточки
+function renderCard (
+  item,
+  userId,
+  container,
+  likeCard,
+  deleteCard,
+  openImage,
+  place = 'end',
+) {
+  const cardElement = createCard(
+    item,
+    userId,
+    deleteCard,
+    likeCard,
+    openImage,
+  );
+  if (place === 'end') {
+    container.append(cardElement);
+  } else {
+    container.prepend(cardElement);
+  }
 };
 
 // Аватар
@@ -70,7 +90,7 @@ function fillProfileInfo (userInfo) {
 // Карточки на странице
 function renderInitialCards (initialCards, userId) {
   initialCards.forEach((card) => {
-    renderCard(card, userId, placesList, likeCard, deleteCard, openImagePopup);
+    renderCard(card, userId, placesList, likeCard, openConfirmationForm, openImagePopup);
   });
 };
 
@@ -95,6 +115,11 @@ function handleConfirmDelete (evt) {
     .catch((err) => {
       console.log(err);
     });
+};
+
+function openConfirmationForm (evt, cardId) {
+  openModal(popupConfirm);
+  popupConfirm.dataset.cardId = cardId;
 };
 
 // Редактирование профиля
@@ -149,7 +174,7 @@ function handleNewCardFormSubmit (evt) {
         userId,
         placesList,
         likeCard,
-        deleteCard,
+        openConfirmationForm,
         openImagePopup,
         'start',
       );
@@ -210,7 +235,6 @@ popupAvatarForm.addEventListener('submit', handleAvatarFormSubmit);
 // Добавление карточки
 newCardButton.addEventListener('click', () => {
   popupNewCardForm.reset();
-  clearValidation(popupNewCardForm, validationConfig);
   openModal(popupNewCard);
 });
 

@@ -1,9 +1,9 @@
 import { deleteLike, putLike } from './api';
-import { openModal } from './modal';
+// import { openModal } from './modal';
 
 // DOM
 const cardTemplate = document.querySelector('#card-template').content;
-const popupConfirm = document.querySelector('.popup_type_confirm');
+
 
 // Создание карточки
 function createCard (card, userId, deleteItem, likeItem, openImage) {
@@ -49,33 +49,11 @@ function createCard (card, userId, deleteItem, likeItem, openImage) {
   return cardElement;
 };
 
-// Расположение карточки
-export function renderCard (
-  item,
-  userId,
-  container,
-  likeCard,
-  deleteCard,
-  openImage,
-  place = 'end',
-) {
-  const cardElement = createCard(
-    item,
-    userId,
-    deleteCard,
-    likeCard,
-    openImage,
-  );
-  if (place === 'end') {
-    container.append(cardElement);
-  } else {
-    container.prepend(cardElement);
-  }
-};
+
 
 // Лайк
 export function likeCard (evt, cardId) {
-  let currentLikes = evt.target.parentNode.querySelector('.card__like-count');
+  const currentLikes = evt.target.parentNode.querySelector('.card__like-count');
 
   if (evt.target.classList.contains('card__like-button_is-active')) {
     deleteLike(cardId)
@@ -99,7 +77,7 @@ export function likeCard (evt, cardId) {
 };
 
 // Удаление
-export function deleteCard (evt, cardId) {
-  openModal(popupConfirm);
-  popupConfirm.dataset.cardId = cardId;
-};
+// export function deleteCard (evt, cardId) {
+//   openModal(popupConfirm);
+//   popupConfirm.dataset.cardId = cardId;
+// };
