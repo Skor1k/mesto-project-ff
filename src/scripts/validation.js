@@ -52,7 +52,7 @@ function checkInputValidity (
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
-    inputElement.setCustomValidity('');
+    inputElement.setCustomValidity("");
   }
 
   if (!inputElement.validity.valid) {
