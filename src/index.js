@@ -199,16 +199,6 @@ popupImageElement.addEventListener('click', (evt) => {
 });
 
 // Профиль
-// profileEditButton.addEventListener('click', () => {
-//   clearValidation(popupEditProfile, validationConfig);
-//   fillProfilePopup(
-//     popupEditProfile,
-//     profileTitle.textContent,
-//     profileDescription.textContent,
-//   );
-//   openModal(popupProfile);
-// });
-
 function handleEditButton() {
   profileNameInput.value = profileTitle.textContent;
   descriptionInput.value = profileDescription.textContent;
