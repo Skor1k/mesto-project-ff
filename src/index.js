@@ -103,8 +103,8 @@ function openImagePopup (imageURL, imageAlt, title) {
   popupCaption.textContent = title;
   openModal(popupImageElement);
 };
-
 // Удаление карточки
+// !!!!!!!!!!!!!!Функцию вынес перестало работать удаление карточки!!!!!!!!!!!!!!!!
 function handleConfirmDelete (evt) {
   deleteCardFromServer(popupConfirm.dataset.cardId)
     .then((result) => {
