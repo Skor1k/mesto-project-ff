@@ -60,6 +60,7 @@ function showInputError(formElement, inputElement, errorMessage, validationConfi
 function hideInputError(formElement, inputElement, validationConfig) {
   const inputError = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
+  inputElement.setCustomValidity("");
   inputError.classList.remove(validationConfig.errorClass);
   inputError.textContent = '';
 };

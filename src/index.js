@@ -1,6 +1,6 @@
 // Импорт файлов
 import './pages/index.css';
-import { createCard, likeCard, deleteCardButton } from './scripts/card.js';
+import { createCard, likeCard } from './scripts/card.js';
 import { renderLoading } from './scripts/utils.js';
 import { openModal, closeModal, closeOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
@@ -103,7 +103,7 @@ function handleConfirmDelete (evt) {
   deleteCardFromServer(popupConfirm.dataset.cardId)
     .then((result) => {
       const card = document.querySelector(`[data-card-id='${popupConfirm.dataset.cardId}']`);
-      deleteCardButton();
+      card.remove();
       closeModal(popupConfirm);
     })
     .catch((err) => {
@@ -198,11 +198,11 @@ popupImageElement.addEventListener('click', (evt) => {
 
 // Профиль
 function handleEditButton() {
+  clearValidation(popupEditProfile, validationConfig);
   profileNameInput.value = profileTitle.textContent;
   descriptionInput.value = profileDescription.textContent;
-  clearValidation(popupEditProfile, validationConfig);
   openPopup(popupProfile);
-}
+};
 
 profileEditButton.addEventListener('click', handleEditButton);
 
@@ -242,7 +242,7 @@ popupConfirm.addEventListener('click', (evt) => {
   closeOverlayModal(evt);
 });
 
-popupConfirmButton.addEventListener('click', handleConfirmDelete);
+popupConfirmButton.addEventListener('submit', handleConfirmDelete);
 
 // Закрыть попап
 document.addEventListener('click', (evt) => {

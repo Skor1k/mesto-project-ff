@@ -74,6 +74,3 @@ export function likeCard (evt, cardId) {
 };
 
 //Удаление
-export function deleteCardButton () {
-  card.remove();
-}
