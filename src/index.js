@@ -109,7 +109,7 @@ function handleConfirmDelete (evt) {
   deleteCardFromServer(popupConfirm.dataset.cardId)
     .then((result) => {
       const card = document.querySelector(`[data-card-id='${popupConfirm.dataset.cardId}']`);
-      card.remove();
+      removeCard();
       closeModal(popupConfirm);
     })
     .catch((err) => {
@@ -160,8 +160,6 @@ function handleAvatarFormSubmit (evt) {
       renderLoading(popupAvatarForm, 'Сохранить');
     });
 };
-
-
 
 // Добавление новой карточки
 function handleNewCardFormSubmit (evt) {
@@ -240,7 +238,7 @@ popupNewCard.addEventListener('click', (evt) => {
 
 popupNewCardForm.addEventListener('submit', handleNewCardFormSubmit);
 
-// Удаление
+// Удаление карточки
 popupConfirm.addEventListener('click', (evt) => {
   closeOverlayModal(evt);
 });

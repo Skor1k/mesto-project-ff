@@ -1,5 +1,4 @@
 import { deleteCard, deleteLike, putLike } from './api';
-// import { openModal } from './modal';
 
 // DOM
 const cardTemplate = document.querySelector('#card-template').content;
@@ -74,3 +73,6 @@ export function likeCard (evt, cardId) {
 };
 
 //Удаление
+export function removeCard () {
+  card.remove();
+}
