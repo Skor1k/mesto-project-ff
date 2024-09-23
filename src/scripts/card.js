@@ -1,4 +1,4 @@
-import { deleteLike, putLike } from './api';
+import { deleteCard, deleteLike, putLike } from './api';
 // import { openModal } from './modal';
 
 // DOM
@@ -72,3 +72,8 @@ export function likeCard (evt, cardId) {
       });
   }
 };
+
+//Удаление
+export function deleteCardButton () {
+  card.remove();
+}

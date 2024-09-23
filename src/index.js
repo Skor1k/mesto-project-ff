@@ -1,6 +1,6 @@
 // Импорт файлов
 import './pages/index.css';
-import { createCard, likeCard } from './scripts/card.js';
+import { createCard, likeCard, deleteCardButton } from './scripts/card.js';
 import { renderLoading } from './scripts/utils.js';
 import { openModal, closeModal, closeOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
@@ -102,10 +102,8 @@ function openImagePopup (imageURL, imageAlt, title) {
 function handleConfirmDelete (evt) {
   deleteCardFromServer(popupConfirm.dataset.cardId)
     .then((result) => {
-      const card = document.querySelector(
-        `[data-card-id='${popupConfirm.dataset.cardId}']`,
-      );
-      card.remove();
+      const card = document.querySelector(`[data-card-id='${popupConfirm.dataset.cardId}']`);
+      deleteCardButton();
       closeModal(popupConfirm);
     })
     .catch((err) => {
@@ -187,10 +185,10 @@ function handleNewCardFormSubmit (evt) {
 };
 
 // Попап профиля
-function fillProfilePopup (form, name, description) {
-  form.elements.name.value = name;
-  form.elements.description.value = description;
-};
+// function fillProfilePopup (form, name, description) {
+//   form.elements.name.value = name;
+//   form.elements.description.value = description;
+// };
 
 // Слушатели
 // Попап картинки
