@@ -104,7 +104,6 @@ function openImagePopup (imageURL, imageAlt, title) {
   openModal(popupImageElement);
 };
 // Удаление карточки
-// !!!!!!!!!!!!!!Функцию вынес перестало работать удаление карточки!!!!!!!!!!!!!!!!
 function handleConfirmDelete (evt) {
   deleteCardFromServer(popupConfirm.dataset.cardId)
     .then((result) => {
@@ -190,22 +189,19 @@ function handleNewCardFormSubmit (evt) {
     });
 };
 
-// Попап профиля
-function handleEditButton() {
-  clearValidation(popupEditProfile, validationConfig);
-  profileNameInput.value = profileTitle.textContent;
-  descriptionInput.value = profileDescription.textContent;
-  openPopup(popupProfile);
-};
-
 // Слушатели
 // Картинки
 popupImageElement.addEventListener('click', (evt) => {
   closeOverlayModal(evt);
 });
 
-// Профиль
-profileEditButton.addEventListener('click', handleEditButton);
+// Попап профиля
+profileEditButton.addEventListener('click', () => {
+  clearValidation(popupEditProfile, validationConfig);
+  profileNameInput.value = profileTitle.textContent;
+  descriptionInput.value = profileDescription.textContent;
+  openModal(popupProfile);
+});
 
 popupProfile.addEventListener('click', (evt) => {
   closeOverlayModal(evt);
@@ -214,7 +210,7 @@ popupProfile.addEventListener('click', (evt) => {
 popupEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
 // Аватар
-avatarEditButton.addEventListener('click', (evt) => {
+avatarEditButton.addEventListener('click', () => {
   clearValidation(popupAvatarForm, validationConfig);
   popupAvatarForm.reset();
   openModal(popupAvatar);

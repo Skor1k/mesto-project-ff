@@ -13,12 +13,9 @@ export function clearValidation(formElement, validationConfig) {
   toggleButtonState(inputList, submitButton, validationConfig);
 
   inputList.forEach((inputElement) => {
-      inputElement.classList.remove(validationConfig.inputErrorClass);
-      const inputError = formElement.querySelector(`.${inputElement.id}-error`);
-
-      inputError.classList.remove(validationConfig.errorClass);
-      inputError.textContent = '';
-  })
+    hideInputError(formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
+    inputElement.setCustomValidity("");
+  });
 };
 
 function setEventListeners(formElement, validationConfig) {
@@ -61,8 +58,10 @@ function hideInputError(formElement, inputElement, validationConfig) {
   const inputError = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
   inputElement.setCustomValidity("");
-  inputError.classList.remove(validationConfig.errorClass);
-  inputError.textContent = '';
+  if (inputError) {
+    inputError.classList.remove(validationConfig.errorClass);
+    inputError.textContent = '';
+  }
 };
 
 function toggleButtonState(inputList, buttonElement, validationConfig) {
