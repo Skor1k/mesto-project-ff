@@ -108,7 +108,7 @@ function handleConfirmDelete (evt) {
   deleteCardFromServer(popupConfirm.dataset.cardId)
     .then((result) => {
       const card = document.querySelector(`[data-card-id='${popupConfirm.dataset.cardId}']`);
-      removeCard();
+      card.remove();
       closeModal(popupConfirm);
     })
     .catch((err) => {
