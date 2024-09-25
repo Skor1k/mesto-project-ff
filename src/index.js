@@ -1,6 +1,6 @@
 // Импорт файлов
 import './pages/index.css';
-import { createCard, likeCard } from './scripts/card.js';
+import { createCard, likeCard, removeCard } from './scripts/card.js';
 import { renderLoading } from './scripts/utils.js';
 import { openModal, closeModal, closeOverlayModal } from './scripts/modal.js';
 import { clearValidation, enableValidation } from './scripts/validation.js';
